@@ -4,7 +4,7 @@
     <div class="exchange">
       <h1>{{ msg }}</h1>
       <p class="tal ml7 mt5 ft7" v-if="userInfo.state !== 'unbind'">
-        欢迎 {{userInfo.cellphone}}用户 
+        欢迎 {{userInfo.cellphone}}用户
         <span class="fr mr5 logisticsImg">
           <!-- <img src="../../static/image/logistics.png" alt=""> -->
           <!-- <router-link class="ml5" to="/order" tag="span">物流信息</router-link> -->
@@ -20,7 +20,7 @@
         </div>
         <div class="exchange_header_r fr">
           <span class="mr3">我的积分:</span>
-          <span v-if="userInfo.state !== 'unbind'" class="red">{{userInfo.point}}</span>
+          <span v-if="userInfo.state !== 'unbind'" class="red">{{integral_count}}</span>
           <router-link v-if="userInfo.state === 'unbind'" to="./login"><i style="color:#ec5151">绑定账号</i></router-link>
           <span class="ml3"> 积分值 ↑</span>
         </div>
@@ -79,6 +79,8 @@
 <script>
 import api from '@/api/api'
 import { Button} from 'element-ui'
+import { mapState } from 'vuex'
+import store from '../store/index.js'
 import { MessageBox, Toast } from 'mint-ui';
 export default {
   name: 'Content',
@@ -88,6 +90,11 @@ export default {
   props: {
     msg: String
   },
+  computed:{
+    ...mapState({
+      integral_count: state => state.integral_count
+    })
+  },
   data(){
     return {
       login: false,
@@ -95,57 +102,14 @@ export default {
       detailFlag:false,
       token: '',
       userInfo:'',
-      goodsList:[
-        // {
-        //   goodsId:'0',
-        //   goodsName: '创意胶囊伞防紫外线',
-        //   needIntegral:200,
-        //   remain:10,
-        //   price: 200,
-        //   imgUrl:'http://www.jxdetai.com/Storage/master/product/thumbs100/100_1b7492be276345148f18336733383277.png'
-        // },
-        // {
-        //   goodsId:'0',
-        //   integral:200,
-        //   remain:10,
-        //   price: 200,
-        //   imgUrl:'http://www.jxdetai.com/Storage/master/product/thumbs100/100_1b7492be276345148f18336733383277.png'
-        // },
-        // {
-        //   goodsId:'0',
-        //   integral:200,
-        //   remain:10,
-        //   price: 200,
-        //   imgUrl:'http://www.jxdetai.com/Storage/master/product/thumbs100/100_1b7492be276345148f18336733383277.png'
-        // },
-        // {
-        //   goodsId:'0',
-        //   integral:200,
-        //   remain:10,
-        //   price: 200,
-        //   imgUrl:'http://www.jxdetai.com/Storage/master/product/thumbs100/100_1b7492be276345148f18336733383277.png'
-        // },
-        // {
-        //   goodsId:'0',
-        //   integral:200,
-        //   remain:10,
-        //   price: 200,
-        //   imgUrl:'http://www.jxdetai.com/Storage/master/product/thumbs100/100_1b7492be276345148f18336733383277.png'
-        // },
-        // {
-        //   goodsId:'0',
-        //   integral:200,
-        //   remain:10,
-        //   price: 200,
-        //   imgUrl:'http://www.jxdetai.com/Storage/master/product/thumbs100/100_1b7492be276345148f18336733383277.png'
-        // },
-      ]
+      goodsList:[]
     }
   },
   created () {
-    this.init()
+    
   },
   mounted () {
+    this.init()
   },
   beforeRouteLeave(to, from, next) {
     this.detailFlag = false
@@ -201,48 +165,14 @@ export default {
       }
     },
     init() {
-      // 兑换详情接口
-      // 兑换积分 历史记录列表
-      
       let code = this.$route.query.code
       // 获取商品列表
       api.goods()
         .then((res)=>{
-          // res.result
-          // let c = [
-          //   {
-          //     "id": 100001,
-          //     "name": "商品名称",
-          //     "img_url": "http://www.jxdetai.com/Storage/master/product/thumbs100/100_1b7492be276345148f18336733383277.png",
-          //     "point": 20,
-          //     "count": 20,
-          //     "price": "12.5",
-          //     "state": "show"
-          //   },
-          //   {
-          //     "id": 100002,
-          //     "name": "商品名称",
-          //     "img_url": "http://www.jxdetai.com/Storage/master/product/thumbs100/100_1b7492be276345148f18336733383277.png",
-          //     "point": 20,
-          //     "count": 20,
-          //     "price": "12.5",
-          //     "state": "show"
-          //   },
-          //   {
-          //     "id": 100003,
-          //     "name": "商品名称",
-          //     "img_url": "http://www.jxdetai.com/Storage/master/product/thumbs100/100_1b7492be276345148f18336733383277.png",
-          //     "point": 20,
-          //     "count": 20,
-          //     "price": "12.5",
-          //     "state": "show"
-          //   }
-          // ]
           this.$set(this, 'goodsList', res.results)
         })
 
       // 获取code换取token
-      
       let p = new Promise((resolve) =>{
         api.token({code:code})
           .then(res => {
@@ -257,7 +187,7 @@ export default {
         api.userInfo()
           .then((res) => {
             this.$set(this, 'userInfo', res)
-            // this.$commit('integral', res.point)
+            this.$store.commit('integralFnc', res.point)
           })
       })
     },
@@ -286,9 +216,7 @@ export default {
                 duration: 2000
               });
               this.integral = ''
-              // this.userInfo.point = Number(this.userInfo.point) + 
-              // store.commit('integral', Number(this.userInfo.point) + Number(res.point))
-              this.$set(this.userInfo,'point', Number(this.userInfo.point) + Number(res.point))
+              this.$store.commit('integralFnc', Number(this.integral_count) + Number(res.point))
             })
             .catch(()=>{
               Toast({
@@ -304,13 +232,6 @@ export default {
       this.detailFlag = !this.detailFlag
     },
     toOrder(id) {
-      // let flag
-      // if(Number(this.userInfo.point) >= Number(point)){
-      //   flag = true
-      // } else {
-      //   flag = false
-      // }
-
       if (this.userInfo.state === 'unbind'){
         MessageBox.confirm('还未绑定账号，前往绑定？','温馨提示')
           .then(() => {

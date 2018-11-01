@@ -14,28 +14,6 @@
             {{item.updated_at && item.updated_at.split('T')[0]}}
           </span>
         </li>
-        <!-- <li>
-          <span>
-            qwertwefwe
-          </span>
-          <span>
-            50积分
-          </span>
-          <span>
-            2018-10-25
-          </span>
-        </li>
-        <li>
-          <span>
-            qwertwefwe
-          </span>
-          <span>
-            50积分
-          </span>
-          <span>
-            2018-10-25
-          </span>
-        </li> -->
       </ul>
     </div>
   </div>

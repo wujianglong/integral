@@ -39,44 +39,6 @@
               </p>
             </div>
           </li>
-          <!-- <li class="layoutFlex">
-            <div class="ml5 mr5">
-              <img src="http://paihe-mi.oss-cn-beijing.aliyuncs.com/3122bef5df84931fdb19f2274a826860.png" alt="">
-            </div>
-            <div class="product_txt layoutFlex">
-              <p>
-                姥姥的稻田 婴幼儿配方米粉
-              </p>
-              <p>
-                包装：听装
-              </p>
-              <p>
-                规格：1*12*520g
-              </p>
-              <p>
-                价值: <span class="red">30积分</span>
-              </p>
-            </div>
-          </li>
-          <li class="layoutFlex">
-            <div class="ml5 mr5">
-              <img src="http://paihe-mi.oss-cn-beijing.aliyuncs.com/3122bef5df84931fdb19f2274a826860.png" alt="">
-            </div>
-            <div class="product_txt layoutFlex">
-              <p>
-                姥姥的稻田 婴幼儿配方米粉
-              </p>
-              <p>
-                包装：听装
-              </p>
-              <p>
-                规格：1*12*520g
-              </p>
-              <p>
-                价值: <span class="red">30积分</span>
-              </p>
-            </div>
-          </li> -->
         </ul>
       </div>
       <div class="mt5">
@@ -94,7 +56,6 @@
 <script>
   import api from '@/api/api'
   import Nav from '@/components/Nav.vue'
-  // import { MessageBox, Toast } from 'mint-ui';
   export default{
     name: 'login',
     data(){
@@ -137,7 +98,6 @@
         this.update(val)
       },
       selectChange(val){
-        // alert(val)
         console.log(val)
       }
     }
@@ -150,6 +110,7 @@
     .productList_content
       padding-top 1.8rem
       .select_content
+        display none
         padding 0.5rem 0.5rem
         align-items center
         .selectText

@@ -3,52 +3,21 @@
     <Nav :NavText="navText"></Nav>
     <div class="order_content">
       <ul>
-        <!-- <li class="mt5">
-          <div class="order_h layoutFlex">
-            <img class="ml5 mr5" src="../../static/image/logistics.png" alt="">
-            <span class="flex1 tal">
-               2017-11-01 14:04:22 
-            </span>
-            <span class="fr mr5 color1">
-              已发货
-            </span>
-          </div>
-          <div class="order_c">
-            <div class="mt5 mb5 layoutFlex">
-              <div class="ml5">
-                <img src="http://www.jxdetai.com/Storage/master/product/thumbs100/100_1b7492be276345148f18336733383277.png" alt="">
-              </div>
-              <div class="tal cloume layoutFlex ml5">
-                <p class="order_name">美国产</p>
-                <p class="order_integral">2180<span>积分</span><span class="fr mr5">X1</span></p>
-              </div>
-            </div>
-          </div>
-          <div class="order_b">
-            <span class="fl ml5">
-              合计: <span>2180</span>积分
-            </span>
-            <span class="fr mr5 weliu" @click="lookOrder">
-              查看物流
-            </span>
-          </div>
-        </li> -->
         <li class="mt5" v-for="(item, index) in results" :key="index">
           <div class="order_h layoutFlex">
             <img class="ml5 mr5" src="../../static/image/logistics.png" alt="">
             <span class="flex1 tal">
               <span v-if="item.state === 'exchanged'">
-                {{item.created_at | timeFnc}}
+                {{item.updated_at | timeFnc}}
               </span>
               <span v-if="item.state === 'delivered'">
-                {{item.created_at | timeFnc}}
+                {{item.updated_at | timeFnc}}
               </span>
               <span v-if="item.state === 'completed'">
-                {{item.created_at | timeFnc}}
+                {{item.updated_at | timeFnc}}
               </span>
             </span>
             <span class="fr mr5 color1">
-              <!-- {{item.state | stateFnc}} -->
               <span v-if="item.state === 'exchanged'">
                 已兑换
               </span>

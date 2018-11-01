@@ -5,13 +5,6 @@
       <div class="contentImg">
         <img :src="goodList.img_url">
       </div>
-      <!-- "id": 100001,
-              "name": "商品名称",
-              "img_url": "http://www.jxdetai.com/Storage/master/product/thumbs100/100_1b7492be276345148f18336733383277.png",
-              "point": 20,
-              "count": 20,
-              "price": "12.5",
-              "state": "show" -->
       <div class="tal bgw">
         <p class="goodsName">
           {{goodList.name}}
@@ -82,6 +75,8 @@
 <script>
   import api from '@/api/api'
   import Nav from '@/components/Nav.vue'
+  import store from '@/store/index.js'
+  import {mapState} from 'vuex'
   import { MessageBox, Toast } from 'mint-ui';
   export default{
     name: 'login',
@@ -96,75 +91,18 @@
     components:{
       Nav
     },
+    computed:{
+      ...mapState({
+        integral_count: res => res.integral_count
+      })
+    },
     mounted () {
     },
     created(){
       this.integral = this.$route.query.integral ? Number(this.$route.query.integral) : 0
-      // let c = [
-      //       {
-      //         "id": 100001,
-      //         "name": "商品名称",
-      //         "img_url": "http://www.jxdetai.com/Storage/master/product/thumbs100/100_1b7492be276345148f18336733383277.png",
-      //         "point": 20,
-      //         "count": 20,
-      //         "price": "12.5",
-      //         "state": "show"
-      //       },
-      //       {
-      //         "id": 100002,
-      //         "name": "商品名称",
-      //         "img_url": "http://www.jxdetai.com/Storage/master/product/thumbs100/100_1b7492be276345148f18336733383277.png",
-      //         "point": 20,
-      //         "count": 20,
-      //         "price": "12.5",
-      //         "state": "show"
-      //       },
-      //       {
-      //         "id": 100003,
-      //         "name": "商品名称",
-      //         "img_url": "http://www.jxdetai.com/Storage/master/product/thumbs100/100_1b7492be276345148f18336733383277.png",
-      //         "point": 20,
-      //         "count": 20,
-      //         "price": "12.5",
-      //         "state": "show"
-      //       }
-      //     ]
-          
-      //     let c1 = c.filter((o) => {
-      //       return o.id === Number(id)
-      //     })
       let id = this.$route.query.id
       api.goods()
         .then((res)=>{
-          // let c = [
-          //   {
-          //     "id": 100001,
-          //     "name": "商品名称",
-          //     "img_url": "http://www.jxdetai.com/Storage/master/product/thumbs100/100_1b7492be276345148f18336733383277.png",
-          //     "point": 20,
-          //     "count": 20,
-          //     "price": "12.5",
-          //     "state": "show"
-          //   },
-          //   {
-          //     "id": 100002,
-          //     "name": "商品名称",
-          //     "img_url": "http://www.jxdetai.com/Storage/master/product/thumbs100/100_1b7492be276345148f18336733383277.png",
-          //     "point": 20,
-          //     "count": 20,
-          //     "price": "12.5",
-          //     "state": "show"
-          //   },
-          //   {
-          //     "id": 100003,
-          //     "name": "商品名称",
-          //     "img_url": "http://www.jxdetai.com/Storage/master/product/thumbs100/100_1b7492be276345148f18336733383277.png",
-          //     "point": 20,
-          //     "count": 20,
-          //     "price": "12.5",
-          //     "state": "show"
-          //   }
-          // ]
           let cc = res.results.filter((o) => {
             return o.id === Number(id)
           })
@@ -198,11 +136,8 @@
                   count: this.number
                 })
                   .then(()=>{
-                    // Toast({
-                    //   message: '兑换成功',
-                    //   position: 'bottom',
-                    //   duration: 2000
-                    // })
+                    
+                    store.commit('integralFnc', Number(this.integral_count) - t)
                     MessageBox.confirm('是否前往查看？','兑换成功')
                       .then(() => {
                         this.$router.push('/order')
@@ -219,8 +154,6 @@
             })
           }
         }
-        // let t = Number(this.number) * Number(this.goodList.point)
-        // if(Number(this.$route.que))
       }
     }
   }
