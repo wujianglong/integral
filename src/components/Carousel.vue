@@ -10,7 +10,6 @@
         去登录
       </span>
     </header> -->
-
     <!-- 轮播图 -->
     <div class="swiper_content">
         <swiper :options="swiperOption_1">

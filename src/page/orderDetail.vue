@@ -111,7 +111,7 @@
     },
     methods: {
       minus(){
-        if(this.number > 0){
+        if(this.number > 1){
           this.number--
         }
       },

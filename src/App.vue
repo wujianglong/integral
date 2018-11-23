@@ -10,6 +10,18 @@
 <script>
 export default {
   name: 'app',
+  methods: {
+    beforeunloadHandler (e) {
+      localStorage.removeItem('token')
+    }
+  },
+  destroyed() {
+    window.removeEventListener('beforeunload', e => this.beforeunloadHandler(e))
+  },
+  mounted() {
+    window.addEventListener('beforeunload', e => this.beforeunloadHandler(e))
+  }
+
 }
 </script>
 

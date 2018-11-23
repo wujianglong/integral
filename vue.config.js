@@ -2,10 +2,9 @@ module.exports = {
   /** 区分打包环境与开发环境
    * process.env.NODE_ENV==='production'  (打包环境)
    * process.env.NODE_ENV==='development' (开发环境)
-   * baseUrl: process.env.NODE_ENV==='production'?"https://cdn.didabisai.com/front/":'front/',
+   * baseUrl: process.env.NODE_ENV==='production'?'':'',
    */
   // 基本路径
-  // baseUrl: process.env.NODE_ENV === "production" ? "/dist/" : "/",
   baseUrl: process.env.NODE_ENV === "production" ? "./" : "./",
   // 输出文件目录
   outputDir: "dist",
@@ -42,10 +41,6 @@ module.exports = {
   // use thread-loader for babel & TS in production build
   // enabled by default if the machine has more than 1 cores
   parallel: require("os").cpus().length > 1,
-  // 是否启用dll
-  // See https://github.com/vuejs/vue-cli/blob/dev/docs/cli-service.md#dll-mode
-  // PWA 插件相关配置
-  // see https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa
   pwa: {},
   // webpack-dev-server 相关配置
   devServer: {
@@ -55,7 +50,8 @@ module.exports = {
     https: false,
     hotOnly: false,
     proxy: null, // 设置代理
-    before: app => {}
+    before: app => {
+    }
   },
   // 第三方插件配置
   pluginOptions: {

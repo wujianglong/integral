@@ -4,7 +4,7 @@
     <div class="exchange">
       <h1>{{ msg }}</h1>
       <p class="tal ml7 mt5 ft7" v-if="userInfo.state !== 'unbind'">
-        欢迎 {{userInfo.cellphone}}用户
+        欢迎 {{tel}}用户
         <span class="fr mr5 logisticsImg">
           <!-- <img src="../../static/image/logistics.png" alt=""> -->
           <!-- <router-link class="ml5" to="/order" tag="span">物流信息</router-link> -->
@@ -92,7 +92,8 @@ export default {
   },
   computed:{
     ...mapState({
-      integral_count: state => state.integral_count
+      integral_count: state => state.integral_count,
+      tel: state => state.tel
     })
   },
   data(){
@@ -187,6 +188,7 @@ export default {
         api.userInfo()
           .then((res) => {
             this.$set(this, 'userInfo', res)
+            this.$store.commit('telFnc', res.cellphone)
             this.$store.commit('integralFnc', res.point)
           })
       })
@@ -217,6 +219,7 @@ export default {
               });
               this.integral = ''
               this.$store.commit('integralFnc', Number(this.integral_count) + Number(res.point))
+              // this.$store.commit('tel', Number(this.integral_count) + Number(res.point))
             })
             .catch(()=>{
               Toast({
@@ -239,7 +242,7 @@ export default {
           })
           .catch(() => {})
       } else {
-        this.$router.push(`/orderdetail?id=${id}&integral=${this.userInfo.point}`)
+        this.$router.push(`/orderdetail?id=${id}&integral=${this.integral_count}`)
       }
     }
   }

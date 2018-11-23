@@ -6,9 +6,9 @@
       <span style="flex:1">
         {{NavText}}
       </span>
-      <a href="" class="fr mr5" @click="toIndex">
+      <!-- <a href="" class="fr mr5" @click="toIndex">
         <img src="../../static/image/iconfont-shouye.png" alt="">
-      </a>
+      </a> -->
     </header>
   </div>
 </template>

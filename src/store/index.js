@@ -4,7 +4,8 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  integral_count: 0
+  integral_count: 0,
+  tel: ''
 }
 
 const getters = {
@@ -14,6 +15,9 @@ const getters = {
 const mutations = {
   integralFnc (state, status) {
     state.integral_count = status
+  },
+  telFnc (state, status) {
+    state.tel = status
   }
 }
 
