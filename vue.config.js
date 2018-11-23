@@ -10,22 +10,8 @@ module.exports = {
   outputDir: "dist",
   // eslint-loader 是否在保存的时候检查
   lintOnSave: true,
-  // use the full build with in-browser compiler?
-  // https://vuejs.org/v2/guide/installation.html#Runtime-Compiler-vs-Runtime-only
-  // webpack配置
-  // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
   chainWebpack: () => {},
   configureWebpack: () => {},
-  //如果想要引入babel-polyfill可以这样写
-  // configureWebpack: (config) => {
-  //   config.entry = ["babel-polyfill", "./src/main.js"]
-  // },
-  // vue-loader 配置项
-  // https://vue-loader.vuejs.org/en/options.html
-  // dev: {
-  //   assetsPublicPath: "./"
-  // },
-  // 生产环境是否生成 sourceMap 文件
   productionSourceMap: true,
   // css相关配置
   css: {
