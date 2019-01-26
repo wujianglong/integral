@@ -13,50 +13,44 @@ Vue.use(Router)
 
 export default new Router({
   mode: 'history',
-  base:'/',
-  routes:[
-    {
+  base: '/',
+  routes: [{
       path: '/',
       name: "index",
       component: Index
     },
     {
-      path: '/index',
-      name: "index",
-      component: Index
-    },
-    {
-      path:'/login',
+      path: '/login',
       name: "login",
       component: Login
     },
     {
-      path:'/order',
+      path: '/order',
       name: "order",
       component: Order
     },
     {
-      path:'/orderDetail',
+      path: '/orderDetail',
       name: "orderDetail",
       component: OrderDetail
     },
     {
-      path:'/gift',
+      path: '/gift',
       name: "gift",
       component: Gift
     },
     {
-      path:'/logisticsDetail',
+      path: '/logisticsDetail',
       name: "logisticsDetail",
       component: LogisticsDetail
     },
     {
-      path:'/productList',
+      path: '/productList',
       name: "productList",
       component: ProductList
     },
     {
-      path:'/code',
+      path: '/code',
       name: "code",
       component: Code
     }

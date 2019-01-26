@@ -6,7 +6,8 @@
         <div class="selectText">
           请选择产品类型：
         </div>
-        <el-select v-model="value" @change="selectChange" size = "small" placeholder="请选择">
+        <!-- @change="selectChange" -->
+        <el-select v-model="value" size = "small" placeholder="请选择">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -97,9 +98,9 @@
       handleCurrentChange(val){
         this.update(val)
       },
-      selectChange(val){
-        console.log(val)
-      }
+      // selectChange(val){
+      //   console.log(val)
+      // }
     }
   }
 </script>

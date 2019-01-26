@@ -80,7 +80,6 @@
 import api from '@/api/api'
 import { Button} from 'element-ui'
 import { mapState } from 'vuex'
-import store from '../store/index.js'
 import { MessageBox, Toast } from 'mint-ui';
 export default {
   name: 'Content',
