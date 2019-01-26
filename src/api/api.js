@@ -1,21 +1,21 @@
 // 所有接口
 import ask from './config'
 
-let baseApiUrl
-if (process.env.NODE_ENV === 'development') {
-  // 开发环境
-  baseApiUrl = 'http://39.106.161.75:8003'
-  // 测试环境
-} else {
-  // 编译环境
-  if (process.env.HOST === 'pro') {
-    // 正式环境
-    baseApiUrl = 'http://39.106.161.75:8003'
-  } else {
-    // 测试环境
-    baseApiUrl = 'http://39.106.161.75:8003'
-  }
-}
+let baseApiUrl = process.env.VUE_APP_API_ROOT
+// if (process.env.NODE_ENV === 'development') {
+//   // 开发环境
+//   baseApiUrl = 'http://39.106.161.75:8003'
+//   // 测试环境
+// } else {
+//   // 编译环境
+//   if (process.env.HOST === 'pro') {
+//     // 正式环境
+//     baseApiUrl = 'http://39.106.161.75:8003'
+//   } else {
+//     // 测试环境
+//     baseApiUrl = 'http://39.106.161.75:8003'
+//   }
+// }
 
 export default {
   // 获取banner   /api/frontend/banners/  get
@@ -26,7 +26,7 @@ export default {
   token (params) {
     return ask.askPost(baseApiUrl + '/api/frontend/account/token/', params)
   },
-  // 获取用户信息 /api/frontend/acount/information/ get  
+  // 获取用户信息 /api/frontend/acount/information/ get
   userInfo (params) {
     return ask.askGet(baseApiUrl + '/api/frontend/account/information/', params)
   },
@@ -38,7 +38,7 @@ export default {
   goods (params) {
     return ask.askGet(baseApiUrl + '/api/frontend/goods/', params)
   },
-  // 绑定手机号码 /api/frontend/account/bind/ get  
+  // 绑定手机号码 /api/frontend/account/bind/ get
   bind (params) {
     return ask.askPatch(baseApiUrl + '/api/frontend/account/bind/', params)
   },
@@ -71,6 +71,5 @@ export default {
   product(params) {
     return ask.askGet(baseApiUrl + '/api/frontend/products/', params)
   }
-  
-}
 
+}
