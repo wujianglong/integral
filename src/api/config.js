@@ -20,7 +20,7 @@ axios.interceptors.response.use(
   error => {
     switch (error.response.status) {
       case 401:
-        this.$router.replace('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1cf833c38629383a&redirect_uri=http%3A%2F%2Fm-exchange.jxmeiyi.cn%2F&response_type=code&scope=snsapi_base&state=1234#wechat_redirect')
+        window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1cf833c38629383a&redirect_uri=http%3A%2F%2Fm-exchange.jxmeiyi.cn%2F&response_type=code&scope=snsapi_base&state=1234#wechat_redirect'
         break;
       default:
         return Promise.reject(error);
