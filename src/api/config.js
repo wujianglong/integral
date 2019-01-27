@@ -13,11 +13,27 @@ axios.interceptors.request.use((config) => {
   return Promise.reject(error)
 })
 
+axios.interceptors.response.use(
+  response => {
+    return response;
+  },
+  error => {
+    switch (error.response.status) {
+      case 401:
+        this.$router.replace('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1cf833c38629383a&redirect_uri=http%3A%2F%2Fm-exchange.jxmeiyi.cn%2F&response_type=code&scope=snsapi_base&state=1234#wechat_redirect')
+        break;
+      default:
+        return Promise.reject(error);
+    }
+    return error;
+  }
+);
+
 // 请求方法 Post和 Get
 export default {
-  askPost: function (url, params) {
+  askPost: function(url, params) {
     return new Promise((resolve, reject) => {
-      if(window.localStorage.token){
+      if (window.localStorage.token) {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + window.localStorage.token
       }
       axios.post(url, params)
@@ -31,10 +47,10 @@ export default {
         })
     })
   },
-  askGet: function (url, params) {
+  askGet: function(url, params) {
     return new Promise((resolve, reject) => {
 
-      if(window.localStorage.token){
+      if (window.localStorage.token) {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + window.localStorage.token
       }
 
@@ -49,9 +65,9 @@ export default {
         })
     })
   },
-  askPatch: function (url, params) {
+  askPatch: function(url, params) {
     return new Promise((resolve, reject) => {
-      if(window.localStorage.token){
+      if (window.localStorage.token) {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + window.localStorage.token
       }
       axios.patch(url, params)
