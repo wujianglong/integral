@@ -173,6 +173,9 @@ export default {
         })
 
       // 获取code换取token
+      if(localStorage.setItem('token')){
+        return false
+      }
       let p = new Promise((resolve) =>{
         api.token({code:code})
           .then(res => {

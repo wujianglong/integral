@@ -28,7 +28,7 @@
         window.history.length > 2 ? this.$router.go(-1) : this.$router.push('/')
       },
       toIndex1(){
-        window.location.replace('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1cf833c38629383a&redirect_uri=http%3A%2F%2Fwww.wujianglong.com.cn%2Fintegral%2F&response_type=code&scope=snsapi_base&state=1234#wechat_redirect')
+        window.location.replace('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1cf833c38629383a&redirect_uri=http%3A%2F%2Fm-exchange.jxmeiyi.cn%2F&response_type=code&scope=snsapi_base&state=1234#wechat_redirect')
       }
     }
   }
